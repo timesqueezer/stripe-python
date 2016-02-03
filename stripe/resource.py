@@ -32,7 +32,8 @@ def convert_to_stripe_object(resp, api_key, account):
         'transfer_reversal': Reversal,
         'product': Product,
         'sku': SKU,
-        'order': Order
+        'order': Order,
+        'country_spec': CountrySpec,
     }
 
     if isinstance(resp, list):
@@ -862,3 +863,9 @@ class Order(CreateableAPIResource, UpdateableAPIResource,
         headers = populate_headers(idempotency_key)
         return self.request(
             'post', self.instance_url() + '/pay', params, headers)
+
+
+class CountrySpec(ListableAPIResource):
+    @classmethod
+    def class_name(cls):
+        return 'country_spec'
